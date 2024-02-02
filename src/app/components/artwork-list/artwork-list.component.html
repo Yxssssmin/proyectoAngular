@@ -1,0 +1,23 @@
+<!-- <h2 [ngClass]="{'vintage': quadre.date_start < 1900 ? 'blue' : '#FF0000'}">{{quadre.title}}</h2>
+<img src="https://www.artic.edu/iiif/2/{{quadre.image_id}}/full/843,/0/default.jpg " alt=""> -->
+
+<div class="container">
+    <h1>Artworks List</h1>
+    <div class="row">
+    @for (artwork of quadres | artworkFilter: filter; track artwork.id) {
+        <div class="col">
+            <app-artwork [artwork] = "artwork" (likeChanged)="toggleLike($event, artwork)"></app-artwork>
+        </div>
+    }
+
+    <table class="table">
+        <tbody>
+            @for (artwork of quadres; track artwork.id) {
+                <tr app-artwork-row [artwork] = "artwork"></tr>
+            }    
+        </tbody>
+    </table>
+
+    <app-paginacion [artworks]="quadres" (pageChanged)="onPageChanged($event)"></app-paginacion>
+</div>
+</div>
