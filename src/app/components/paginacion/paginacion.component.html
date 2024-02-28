@@ -1,7 +1,39 @@
-<div class="paginacion">
-    <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
-    @for(page of pages; track page) {
-        <button (click)="goToPage(page)" [class.active]="page === currentPage">{{ page }}</button>
-    }
-    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
-</div>
+<div class="d-flex align-items-center justify-content-around mt-5">
+    <nav aria-label="..." class="d-flex row">
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="pages.actualPage === 1">
+          <span class="page-link" (click)="goSearchPage(pages.firstPage)"
+            >&#9666; Primero</span
+          >
+        </li>
+        <ng-container *ngIf="pages.actualPage !== 1">
+          <li class="page-item">
+            <a class="page-link" (click)="goSearchPage(pages.actualPage - 1)">
+              {{ pages.actualPage - 1 }}
+            </a>
+          </li>
+        </ng-container>
+        <li class="page-item">
+          <a class="page-link active" (click)="goSearchPage(pages.actualPage)">
+            {{ pages.actualPage }}
+          </a>
+        </li>
+        <ng-container *ngIf="pages.actualPage !== pages.totalPages">
+          <li class="page-item">
+            <a class="page-link" (click)="goSearchPage(pages.actualPage + 1)">
+              {{ pages.actualPage + 1 }}
+            </a>
+          </li>
+        </ng-container>
+        <li
+          class="page-item"
+          [class.disabled]="pages.actualPage === pages.totalPages"
+        >
+          <span class="page-link" (click)="goSearchPage(pages.totalPages)"
+            >Último &#9656;</span
+          >
+        </li>
+      </ul>
+    </nav>
+
+  </div>

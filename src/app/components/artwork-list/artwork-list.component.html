@@ -9,7 +9,8 @@
             <app-artwork [artwork] = "artwork" (likeChanged)="toggleLike($event, artwork)"></app-artwork>
         </div>
     }
-
+    
+    <app-paginacion [pages]="pages" (pageChanged)="loadArtworks($event, pages.limit)"></app-paginacion>
     <table class="table">
         <tbody>
             @for (artwork of quadres; track artwork.id) {
@@ -18,6 +19,5 @@
         </tbody>
     </table>
 
-    <app-paginacion [artworks]="quadres" (pageChanged)="onPageChanged($event)"></app-paginacion>
 </div>
 </div>
